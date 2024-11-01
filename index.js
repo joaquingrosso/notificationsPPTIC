@@ -19,7 +19,7 @@ app.post("/interfazpagos/api/notificaciones", (req, res) => {
     timestamp: new Date()
   };
   
-  const logString = util.inspect(logData, { depth: null, colors: false });
+  const logString = util.inspect(logData, { depth: null, colors: false, compact: false });
   console.log(logString);
   fs.appendFileSync("logs.txt", logString + "\n");
   
@@ -36,7 +36,7 @@ app.post("/interfazpagos/api/notificaciones/:param", (req, res) => {
     timestamp: new Date()
   };
 
-  const logString = util.inspect(logData, { depth: null, colors: false });
+  const logString = util.inspect(logData, { depth: null, colors: false, compact: false });
   console.log(logString);
   fs.appendFileSync("logs.txt", logString + "\n");
 
@@ -54,7 +54,7 @@ app.post("/interfazpagos/api/notificaciones/*", (req, res) => {
     timestamp: new Date()
   };
 
-  const logString = util.inspect(logData, { depth: null, colors: false });
+  const logString = util.inspect(logData, { depth: null, colors: false, compact: false });
   console.log(logString);
   fs.appendFileSync("logs.txt", logString + "\n");
 
