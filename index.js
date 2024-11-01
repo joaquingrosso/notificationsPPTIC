@@ -49,6 +49,11 @@ app.post("/interfazpagos/api/notificaciones/*", (req, res) => {
   res.json({ message: "POST recibido en /notificaciones con multiples parámetros", data: logData });
 });
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.listen(3000, () => {
   console.log("Servidor escuchando en el puerto 3000");
 });
