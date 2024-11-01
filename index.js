@@ -3,12 +3,12 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const cors = require("cors");
+const util = require("util");
 
 app.use(express.json());
 app.use(cors());
 
-const fs = require("fs");
-const util = require("util");
+
 
 // Endpoint para POST sin parámetros adicionales
 app.post("/interfazpagos/api/notificaciones", (req, res) => {
