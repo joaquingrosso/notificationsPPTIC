@@ -7,6 +7,9 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
+const fs = require("fs");
+const util = require("util");
+
 // Endpoint para POST sin parámetros adicionales
 app.post("/interfazpagos/api/notificaciones", (req, res) => {
   const logData = {
@@ -15,8 +18,11 @@ app.post("/interfazpagos/api/notificaciones", (req, res) => {
     body: req.body,
     timestamp: new Date()
   };
-  console.log(logData);
-  fs.appendFileSync("logs.txt", JSON.stringify(logData) + "\n");
+  
+  const logString = util.inspect(logData, { depth: null, colors: false });
+  console.log(logString);
+  fs.appendFileSync("logs.txt", logString + "\n");
+  
   res.json({ message: "POST recibido en /notificaciones", data: logData });
 });
 
@@ -29,12 +35,15 @@ app.post("/interfazpagos/api/notificaciones/:param", (req, res) => {
     params: req.params,
     timestamp: new Date()
   };
-  console.log(logData);
-  fs.appendFileSync("logs.txt", JSON.stringify(logData) + "\n");
+
+  const logString = util.inspect(logData, { depth: null, colors: false });
+  console.log(logString);
+  fs.appendFileSync("logs.txt", logString + "\n");
+
   res.json({ message: "POST recibido en /notificaciones con parámetro", data: logData });
 });
 
-// Endpoint para POST con multiples parámetros
+// Endpoint para POST con múltiples parámetros
 app.post("/interfazpagos/api/notificaciones/*", (req, res) => {
   const param = req.params[0]; // Captura lo que sigue a '/interfazpagos/api/notificaciones/'
   const logData = {
@@ -44,9 +53,12 @@ app.post("/interfazpagos/api/notificaciones/*", (req, res) => {
     params: req.params,
     timestamp: new Date()
   };
-  console.log(logData);
-  fs.appendFileSync("logs.txt", JSON.stringify(logData) + "\n");
-  res.json({ message: "POST recibido en /notificaciones con multiples parámetros", data: logData });
+
+  const logString = util.inspect(logData, { depth: null, colors: false });
+  console.log(logString);
+  fs.appendFileSync("logs.txt", logString + "\n");
+
+  res.json({ message: "POST recibido en /notificaciones con múltiples parámetros", data: logData });
 });
 
 app.use((req, res, next) => {
